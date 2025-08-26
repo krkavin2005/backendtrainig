@@ -65,4 +65,22 @@ app.delete('/deleteStudentByRoll',async(req,res)=>{
         res.status(500).send('Error in deleting student')
     }
 })
+
+app.put('/updateStudent',async(res,req)=>{
+    const {roll,name,age,department}=req.body
+    try{
+        const updatedStudent=await student.findOneAndUpdate(
+        {roll},
+        {name,age,department},
+        {new:true}
+    );
+    if(updatedStudent){
+        res.send("Student Updated");
+    }
+    else res.status(404).send("Student not found")
+}
+catch(error){
+    res.status(500).send("Error while updating student")
+}
+})
 app.listen(3000)
