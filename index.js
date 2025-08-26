@@ -66,8 +66,14 @@ app.delete('/deleteStudentByRoll',async(req,res)=>{
     }
 })
 
-app.put('/updateStudent',async(res,req)=>{
-    const {roll,name,age,department}=req.body
+app.put('/updateStudent',async(req,res)=>{
+    let {body} = req;
+    console.log(req.req);
+    
+    // console.log(JSON.stringify(req));
+    
+    const {roll,name,age,department}=body;
+    
     try{
         const updatedStudent=await student.findOneAndUpdate(
         {roll},
